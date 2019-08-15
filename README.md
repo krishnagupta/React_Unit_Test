@@ -66,3 +66,13 @@ it('componentWillReceiveProps', async () => {
     expect(spy).toHaveBeenCalled();
   })
   ```
+  
+  ### Testing function having arguement as another function
+  ```
+  it('should call onSelectLessonSet', () => {
+    const component = renderShallow(<EditLessonSetPreference {...props} />).instance()
+    const setFieldValue = jest.fn()
+    component.onSelectLessonSet(123, setFieldValue)
+    expect(setFieldValue).toHaveBeenCalled()
+  })
+  ```
