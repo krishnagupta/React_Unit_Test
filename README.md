@@ -55,3 +55,14 @@ describe('greet', () => {
   });
 });
 ```
+
+### Testing Component Lifecycle
+```
+it('componentWillReceiveProps', async () => {
+    const component = renderShallow(<NewHearingInstrument {...props} />)
+    const instance = component.instance()
+    const spy = jest.spyOn(instance, 'prefillEditPage')
+    await instance.componentWillReceiveProps(props)
+    expect(spy).toHaveBeenCalled();
+  })
+  ```
