@@ -76,3 +76,41 @@ it('componentWillReceiveProps', async () => {
     expect(setFieldValue).toHaveBeenCalled()
   })
   ```
+### Async/Await Mock Value Return
+```
+import {callAnotherFunction} from '../../../utils';
+
+  export const handler = async (event, context, callback) => {
+
+  const {emailAddress, emailType} = event.body;
+  console.log("**** GETTING HERE = 1")
+  const sub = await callAnotherFunction(emailAddress, emailType);
+  console.log("**** Not GETTING HERE = 2", sub) // **returns undefined**
+
+  // do something else here
+  callback(null, {success: true, returnValue: sub})
+
+}
+```
+Test :-
+```
+import { callAnotherFunction } from '../../../utils';
+
+callAnotherFunction.mockImplementation(() => Promise.resolve('someValue'));
+
+test('test' , done => {
+  const testData = {
+    body: {
+      emailAddress: 'email',
+      emailType: 'type
+    }
+  };
+
+  function callback(dataTest123) {
+    expect(dataTest123).toBe({success: true, returnValue: 'someValue');
+    done();
+  }
+
+  handler(testData, null, callback);
+});
+```
