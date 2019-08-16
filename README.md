@@ -58,6 +58,20 @@ describe('greet', () => {
 
 ### Testing Component Lifecycle
 ```
+ componentWillReceiveProps(nextProps, nextState) {
+    if (
+      !this.state.isPagePrefilled &&
+      !nextProps.PatientQuery.loading &&
+      !nextProps.DeviceModelsQuery.loading &&
+      !nextProps.DeviceModelsFeaturesQuery.loading &&
+      !_.isEmpty(nextProps.Customer)
+    ) {
+      this.prefillEditPage(nextProps)
+    }
+  }
+  ```
+  Test :-
+```
 it('componentWillReceiveProps', async () => {
     const component = renderShallow(<NewHearingInstrument {...props} />)
     const instance = component.instance()
