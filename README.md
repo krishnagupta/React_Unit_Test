@@ -128,3 +128,40 @@ test('test' , done => {
   handler(testData, null, callback);
 });
 ```
+
+```
+biblia/js/search.js
+const axios = require("axios");
+const googleBooksUrl ="https://www.googleapis.com/books/v1/volumes";
+const keys = require("../config/keys");
+const search = {
+  fetchBooks: (term, index = 0) =>
+    axios.get(googleBooksUrl, {
+      params: {
+        q: term,
+        startIndex: index,
+        key: keys.googleBooksApiKey
+      }
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(err => err.response)
+    ```
+    Test :-
+    ```
+    const mockAxios = require("axios");
+const search = require("../js/search");
+const keys = require("../config/keys");
+const searchResponse = require("../__fixtures__/searchResponse");
+test("fetches results from google books api", () => {
+  mockAxios.get.mockImplementationOnce(() =>
+    Promise.resolve(searchResponse.raw)
+  );
+  let term = "tolkein";
+  let index = 0;
+return search.fetchBooks(term, index).then(response => {
+    expect(response).toEqual(searchResponse.raw);
+  });
+});
+```
