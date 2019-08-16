@@ -147,10 +147,12 @@ const search = {
       return response;
     })
     .catch(err => err.response)
-    ```
-    Test :-
-    ```
-    const mockAxios = require("axios");
+ ```
+ 
+Test :-
+
+```
+const mockAxios = require("axios");
 const search = require("../js/search");
 const keys = require("../config/keys");
 const searchResponse = require("../__fixtures__/searchResponse");
