@@ -192,3 +192,25 @@ it('should reset SupportId after componentWillUnmount is called', () => {
     expect(componentWillUnmount).toHaveBeenCalled()
   })
 ```
+
+### should call handleSubmit function on submit
+```
+it('should call handleSubmit function on submit', () => {
+    const wrapper = shallow(<Search toggleAlert={jest.fn()} />)
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
+    wrapper.instance().forceUpdate()
+    wrapper.find('.btn').simulate('click')
+    expect(spy).toHaveBeenCalled()
+    spy.mockClear()
+  })
+  
+  OR
+  
+  it('should call handleSubmit function on submit', () => {
+    const wrapper = shallow(<Search toggleAlert={jest.fn()} />)
+    wrapper.instance().handleSubmit = jest.fn()
+    wrapper.update()
+    wrapper.find('.btn').simulate('click')
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
+  })
+```
