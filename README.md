@@ -182,3 +182,13 @@ test('It should call and return Date.now()', () => {
   global.Date.now = realDateNow;
 });
 ```
+
+### Testing ComponetWillUnmount
+```
+it('should reset SupportId after componentWillUnmount is called', () => {
+    const component = renderShallow(<ProfileTuning {...props} />)
+    const componentWillUnmount = jest.spyOn(component.instance(), 'componentWillUnmount')
+    component.unmount()
+    expect(componentWillUnmount).toHaveBeenCalled()
+  })
+```
