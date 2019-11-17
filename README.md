@@ -214,3 +214,14 @@ it('should call handleSubmit function on submit', () => {
     expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
   })
 ```
+
+### Should catch exception while Fetching Feature for devices
+```
+it('Should catch exception while Fetching Feature for devices', () => {
+    const getHdDeviceModelsFeatures = jest.fn(() => {
+      throw TypeError()
+    })
+    instance.fetchFeaturesForDevices({ leftModelId: '0', rightModelId: '0' })
+    expect(getHdDeviceModelsFeatures).toThrow(TypeError)
+  })
+```
